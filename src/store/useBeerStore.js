@@ -1,23 +1,21 @@
 import { create } from "zustand";
-import axios from "axios";
+// import axios from "axios";
 
-const instance = axios.create({
-   baseURL: "https://api.punkapi.com/v2/beers?page=1",
-});
+// const instance = axios.create({
+//    baseURL: "https://api.punkapi.com/v2/beers?page=1",
+// });
 
 export const useBeerStore = create(set => ({
-   // *storage
    recipesList: [],
-
-   // ?methods
    getRecipesList: async () => {
       try {
-         const result = await instance.get();
+         const response = await fetch(`https://api.punkapi.com/v2/beers?page=1`);
 
-         set(state => {
-            console.log(result);
-            return { recipesList: [...result] };
-         });
+         const data = await response.json();
+
+         set(() => ({
+            recipesList: data,
+         }));
       } catch (error) {
          console.log(`this is ${error}`);
       }
