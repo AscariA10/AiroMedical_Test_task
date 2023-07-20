@@ -1,22 +1,48 @@
 import { useEffect } from "react";
 import { useBeerStore } from "../store/useBeerStore";
 
+import { SingleRecipeWindow } from "./SingleRecipeWindow";
+
 export const App = () => {
+   //*storage
    const recipesList = useBeerStore(state => state.recipesList);
-   const getBeerList = useBeerStore(state => state.getRecipesList);
+
+   //?methods
+   const getRecipesList = useBeerStore(state => state.getRecipesList);
+   const setChoosenRecipe = useBeerStore(state => state.setChoosenRecipe);
+
    useEffect(() => {
       if (recipesList.length === 0) {
-         getBeerList();
+         getRecipesList();
       }
-   }, [recipesList.length, getBeerList]);
+   }, [recipesList.length, getRecipesList]);
+
    const visibleList = recipesList.slice(0, 15);
-   console.log(recipesList);
-   console.log(visibleList);
+
+   function handleClick(elementId) {
+      const selectedRecipe = visibleList.find(element => element.id === elementId);
+      setChoosenRecipe(selectedRecipe);
+   }
+
+   // console.log(recipesList);
+   // console.log(visibleList);
+
    return (
-      <ul>
-         {visibleList.map(({ id, name }) => (
-            <li key={id}>{name}</li>
-         ))}
-      </ul>
+      <>
+         <ul>
+            {visibleList.map(element => (
+               <li
+                  key={element.id}
+                  onClick={event => {
+                     event.preventDefault();
+                     handleClick(element.id);
+                  }}
+               >
+                  {element.name}
+               </li>
+            ))}
+         </ul>
+         <SingleRecipeWindow />
+      </>
    );
 };

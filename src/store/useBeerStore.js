@@ -4,6 +4,7 @@ export const useBeerStore = create(set => ({
    // * storage
    recipesList: [],
    selectedRecipes: [],
+   choosenRecipe: {},
 
    // ? methods
    getRecipesList: async () => {
@@ -26,6 +27,10 @@ export const useBeerStore = create(set => ({
          const updateSelectedRecipes = isSelected
             ? selectedRecipes.filter(id => id !== recipeId)
             : [...selectedRecipes, recipeId];
+         return { selectedRecipes: updateSelectedRecipes };
       });
+   },
+   setChoosenRecipe: recipe => {
+      set({ choosenRecipe: recipe });
    },
 }));
