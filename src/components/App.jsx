@@ -9,10 +9,14 @@ export const App = () => {
          getBeerList();
       }
    }, [recipesList.length, getBeerList]);
-   // useEffect(async () => {
-   //    const beerList = await useBeerStore(state => state.getRecipesList);
-   //    setBeerList(beerList);
-   // });
+   const visibleList = recipesList.slice(0, 15);
    console.log(recipesList);
-   return <div>React homework template</div>;
+   console.log(visibleList);
+   return (
+      <ul>
+         {visibleList.map(({ id, name }) => (
+            <li key={id}>{name}</li>
+         ))}
+      </ul>
+   );
 };

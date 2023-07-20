@@ -1,12 +1,11 @@
 import { create } from "zustand";
-// import axios from "axios";
-
-// const instance = axios.create({
-//    baseURL: "https://api.punkapi.com/v2/beers?page=1",
-// });
 
 export const useBeerStore = create(set => ({
+   // * storage
    recipesList: [],
+   selectedRecipes: [],
+
+   // ? methods
    getRecipesList: async () => {
       try {
          const response = await fetch(`https://api.punkapi.com/v2/beers?page=1`);
@@ -19,5 +18,14 @@ export const useBeerStore = create(set => ({
       } catch (error) {
          console.log(`this is ${error}`);
       }
+   },
+   toggleSelectedRecipe: recipeId => {
+      set(state => {
+         const { selectedRecipes } = state;
+         const isSelected = selectedRecipes.includes(recipeId);
+         const updateSelectedRecipes = isSelected
+            ? selectedRecipes.filter(id => id !== recipeId)
+            : [...selectedRecipes, recipeId];
+      });
    },
 }));
