@@ -5,11 +5,14 @@ import { SingleRecipeWindow } from "./SingleRecipeWindow";
 
 export const App = () => {
    //*storage
+   const selectedRecipes = useBeerStore(state => state.selectedRecipes);
    const recipesList = useBeerStore(state => state.recipesList);
 
    //?methods
+   const deleteSelectedRecipes = useBeerStore(state => state.deleteSelectedRecipes);
    const getRecipesList = useBeerStore(state => state.getRecipesList);
    const setChoosenRecipe = useBeerStore(state => state.setChoosenRecipe);
+   const toggleSelectedRecipe = useBeerStore(state => state.toggleSelectedRecipe);
 
    useEffect(() => {
       if (recipesList.length === 0) {
@@ -24,11 +27,20 @@ export const App = () => {
       setChoosenRecipe(selectedRecipe);
    }
 
+   function handleDelete() {
+      deleteSelectedRecipes();
+   }
    // console.log(recipesList);
    // console.log(visibleList);
 
    return (
       <>
+         {selectedRecipes.length > 0 ? (
+            <button type="button" onClick={handleDelete}>
+               delete recipes
+            </button>
+         ) : null}
+
          <ul>
             {visibleList.map(element => (
                <li
@@ -36,6 +48,10 @@ export const App = () => {
                   onClick={event => {
                      event.preventDefault();
                      handleClick(element.id);
+                  }}
+                  onContextMenu={event => {
+                     event.preventDefault();
+                     toggleSelectedRecipe(element.id);
                   }}
                >
                   {element.name}
