@@ -12,9 +12,7 @@ export const useBeerStore = create(set => ({
       try {
          const { currentPage } = useBeerStore.getState();
          const response = await fetch(`https://api.punkapi.com/v2/beers?page=${currentPage}`);
-
          const data = await response.json();
-
          set(state => {
             return {
                recipesList: data,
@@ -28,7 +26,6 @@ export const useBeerStore = create(set => ({
    toggleSelectedRecipe: recipeId => {
       set(state => {
          const { selectedRecipes } = state;
-
          const isSelected = selectedRecipes.includes(recipeId);
          const updateSelectedRecipes = isSelected
             ? selectedRecipes.filter(id => id !== recipeId)
