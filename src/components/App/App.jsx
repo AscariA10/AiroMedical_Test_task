@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { useBeerStore } from "../store/useBeerStore";
+import { useBeerStore } from "../../store/useBeerStore";
 
-import { SingleRecipeWindow } from "./SingleRecipeWindow";
+import { SingleRecipeWindow } from "../SingleRecipeWindow/SingleRecipeWindow";
+
+import { Wrapper, RecipesList } from "./App.styled.js";
 
 export const App = () => {
    //*storage
@@ -34,14 +36,14 @@ export const App = () => {
    // console.log(visibleList);
 
    return (
-      <>
+      <Wrapper>
          {selectedRecipes.length > 0 ? (
             <button type="button" onClick={handleDelete}>
                delete recipes
             </button>
          ) : null}
 
-         <ul>
+         <RecipesList>
             {visibleList.map(element => (
                <li
                   key={element.id}
@@ -57,8 +59,8 @@ export const App = () => {
                   {element.name}
                </li>
             ))}
-         </ul>
+         </RecipesList>
          <SingleRecipeWindow />
-      </>
+      </Wrapper>
    );
 };
