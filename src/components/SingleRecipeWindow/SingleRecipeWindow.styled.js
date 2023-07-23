@@ -8,7 +8,6 @@ export const SectionWrapper = styled.section`
    gap: 40px;
 
    padding: 40px;
-   border: 1px dashed red;
 `;
 
 export const BeerImgThumb = styled.div`

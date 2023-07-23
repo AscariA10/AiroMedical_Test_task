@@ -36,12 +36,8 @@ export const SingleRecipeWindow = () => {
             <ul>
                {hops?.map(element => (
                   <li key={nanoid()}>
-                     <span>{element.name} </span>
-                     <span>
-                        weight: {element.amount.value} {element.amount.unit}
-                     </span>
-                     <span> add at: {element.add}</span>
-                     <span> taste attribute: {element.attribute}</span>
+                     {element.name} weight: {element.amount.value} {element.amount.unit} add at:{" "}
+                     {element.add} taste attribute: {element.attribute}
                   </li>
                ))}
             </ul>
@@ -49,10 +45,8 @@ export const SingleRecipeWindow = () => {
             <ul>
                {malt?.map(element => (
                   <li key={nanoid()}>
-                     <span>{element.name} </span>
-                     <span>
-                        weight: {element.amount.value} {element.amount.unit}
-                     </span>
+                     {" "}
+                     {element.name} weight: {element.amount.value} {element.amount.unit}
                   </li>
                ))}
             </ul>

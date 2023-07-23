@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useBeerStore } from "../../store/useBeerStore";
-
+import { Recipe } from "components/Recipe/Recipe";
 import { SingleRecipeWindow } from "../SingleRecipeWindow/SingleRecipeWindow";
 
-import { Wrapper, RecipesList } from "./App.styled.js";
+import { Wrapper, RecipesList, ListWrapper, DeleteButton } from "./App.styled.js";
 
 export const App = () => {
    //*storage
@@ -14,7 +14,7 @@ export const App = () => {
    const deleteSelectedRecipes = useBeerStore(state => state.deleteSelectedRecipes);
    const getRecipesList = useBeerStore(state => state.getRecipesList);
    const setChoosenRecipe = useBeerStore(state => state.setChoosenRecipe);
-   const toggleSelectedRecipe = useBeerStore(state => state.toggleSelectedRecipe);
+   // const toggleSelectedRecipe = useBeerStore(state => state.toggleSelectedRecipe);
 
    useEffect(() => {
       if (recipesList.length === 0) {
@@ -32,34 +32,23 @@ export const App = () => {
    function handleDelete() {
       deleteSelectedRecipes();
    }
-   // console.log(recipesList);
-   // console.log(visibleList);
-
    return (
       <Wrapper>
-         {selectedRecipes.length > 0 ? (
-            <button type="button" onClick={handleDelete}>
-               delete recipes
-            </button>
-         ) : null}
+         <ListWrapper>
+            {selectedRecipes.length > 0 ? (
+               <DeleteButton type="button" onClick={handleDelete}>
+                  delete recipes
+               </DeleteButton>
+            ) : null}
 
-         <RecipesList>
-            {visibleList.map(element => (
-               <li
-                  key={element.id}
-                  onClick={event => {
-                     event.preventDefault();
-                     handleClick(element.id);
-                  }}
-                  onContextMenu={event => {
-                     event.preventDefault();
-                     toggleSelectedRecipe(element.id);
-                  }}
-               >
-                  {element.name}
-               </li>
-            ))}
-         </RecipesList>
+            <RecipesList>
+               {visibleList.map(element => (
+                  <Recipe key={element.id} elementInfo={element} handleClick={handleClick}>
+                     {element.name}
+                  </Recipe>
+               ))}
+            </RecipesList>
+         </ListWrapper>
          <SingleRecipeWindow />
       </Wrapper>
    );
