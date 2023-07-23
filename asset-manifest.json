@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/AiroMedical_Test_task/static/css/main.7acaea2f.css",
-    "main.js": "/AiroMedical_Test_task/static/js/main.3c9d8eda.js",
+    "main.js": "/AiroMedical_Test_task/static/js/main.01993238.js",
     "index.html": "/AiroMedical_Test_task/index.html",
     "main.7acaea2f.css.map": "/AiroMedical_Test_task/static/css/main.7acaea2f.css.map",
-    "main.3c9d8eda.js.map": "/AiroMedical_Test_task/static/js/main.3c9d8eda.js.map"
+    "main.01993238.js.map": "/AiroMedical_Test_task/static/js/main.01993238.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.3c9d8eda.js"
+    "static/js/main.01993238.js"
   ]
 }
